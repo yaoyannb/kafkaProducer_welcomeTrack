@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "^16.0.0",
     "csv": "^5.5.0",
+    "kafkajs": "^1.15.0",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
