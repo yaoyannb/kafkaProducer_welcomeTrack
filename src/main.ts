@@ -4,21 +4,16 @@ const fs = require('fs');
 
 
 const kafka = new Kafka({
-  //clientId: "test-app",
   brokers: ["localhost:9092"]
 });
 
-const producer = kafka.producer();/*kafka.producer({
-  maxInFlightRequests: 1,
-  idempotent: true,
-  transactionalId: "uniqueProducerId",
-});*/
+const producer = kafka.producer();
 
 async function sendPayload(input: string) {
   try {
     await producer.send({
       topic: "delivery_details",
-      messages: [{ /*key: "test",*/ value: input }],
+      messages: [{ value: input }],
     });
   } catch (e) {
     console.error("Caught Error while sending:", e);
@@ -41,7 +36,6 @@ async function sendData(data : string)
 
 async function main() 
 {
-  await producer.connect();
   try 
   {
       fs.createReadStream('./data/data.csv')
@@ -53,7 +47,6 @@ async function main()
   {
      console.error(e);
   }
-  await producer.disconnect();
 }
 
 main();
